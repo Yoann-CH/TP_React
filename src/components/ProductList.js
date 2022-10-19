@@ -31,7 +31,6 @@ export default function ProductList() {
   );
 }
 
-//
 //[
 //    "product 1",
 //    "product 2",
