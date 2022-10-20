@@ -1,18 +1,21 @@
-const products = [
+export const products = [
   {
     id: 1,
     name: "Product 1",
     stocks: 10,
+    price: 10,
   },
   {
     id: 2,
     name: "Product 2",
     stocks: 0,
+    price: 20,
   },
   {
     id: 3,
     name: "Product 3",
     stocks: 10,
+    price: 30,
   },
 ];
 

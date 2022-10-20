@@ -1,4 +1,4 @@
-import Cart from "./views/Cart";
+import Cart from "./views/Tp1/Cart";
 
 function App() {
   return <Cart />;

@@ -4,6 +4,7 @@ export default function Button({
   color = "red",
   rounded = false,
   onClick,
+  ...rest
 }) {
   if (!onClick) {
     throw new Error("no onClick function provided");
@@ -17,7 +18,7 @@ export default function Button({
   }
 
   return (
-    <button style={styles} onClick={onClick}>
+    <button style={styles} onClick={onClick} {...rest}>
       {title}
     </button>
   );
