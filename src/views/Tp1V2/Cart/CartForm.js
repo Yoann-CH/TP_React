@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { products } from "../../components/ProductList";
+import { products } from "../../../components/ProductList";
 
 export default function CartForm({ onSubmit }) {
   const [itemId, setSelectedProduct] = useState(products[0].id);
@@ -10,7 +10,7 @@ export default function CartForm({ onSubmit }) {
     //const formData = new FormData(e.target);
     //const itemId = parseInt(formData.get("product"));
     //const quantity = parseInt(formData.get("quantity"));
-    onSubmit(itemId, quantity);
+    onSubmit({ product: itemId, quantity });
   }
 
   return (
