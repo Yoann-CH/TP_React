@@ -1,9 +1,26 @@
-import { useState } from "react";
-import { products } from "../../../components/ProductList";
+import { useEffect, useState } from "react";
+//import { products } from "../../../components/ProductList";
 
 export default function CartForm({ onSubmit }) {
-  const [itemId, setSelectedProduct] = useState(products[0].id);
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3002/products")
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data);
+      });
+  }, []);
+
+  const [itemId, setSelectedProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+
+  useEffect(() => {
+    if (!itemId && products.length) {
+      setSelectedProduct(products[0].id);
+    }
+  }, [products]);
+
   function handleSubmit(e) {
     e.preventDefault();
     // Récupération des valeurs du formulaire en JS natif

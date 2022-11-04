@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ListContainer({
   initialItems = [],
@@ -36,6 +36,10 @@ export default function ListContainer({
       );
     };
   }
+  useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
+
   return (
     <>
       {availableActions.add && <AddForm onSubmit={listeners.add} />}
