@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { addUser } from './api';
 
 const initialValue = {
     name: "",
-    username : "",
+    lastname : "",
     age: 0,
     email: "",
 }
@@ -18,10 +18,13 @@ export default function AddUserForm(){
         setUser({...user, [e.target.name]: e.target.value});
     }
 
+
     function handleSubmit(e) {
         e.preventDefault();
         addUser(user);
     }
+
+    console.log(user)
 
     return (
         <div>
@@ -32,8 +35,8 @@ export default function AddUserForm(){
                 <label for="lastname">Nom</label>
                 <input name="lastname" onChange={(e) => onValueChange(e)} value={lastname}></input>
                 <label for="age">Age</label>
-                <input name="age" onChange={(e) => onValueChange(e)} value={age}></input>
-                <label for="email">Prénom</label>
+                <input type="number" name="age" onChange={(e) => onValueChange(e)} value={age}></input>
+                <label for="email">Email</label>
                 <input name="email" onChange={(e) => onValueChange(e)} value={email}></input>
                 <input type="submit" value="Créer"></input>
             </form>   

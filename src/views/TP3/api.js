@@ -1,22 +1,28 @@
 const url = "http://localhost:5000/users";
 
-export const getallUsers = async () => {
-    return await fetch(url).then((response) => response.json());
+export const getallUsers = () => {
+    return fetch(url).then((response) => response.json());
 }
 
-export const addUser = async (user) => {
-    return await fetch(url,{
+export const addUser = (user) => {
+    return fetch(`${url}/`,{
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-        },
-        body: user
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: user.name,
+            lastname: user.lastname,
+            age: user.age,
+            email: user.email
+          })
     });
 }
 
 export const editUser = async (id, user) => {
     return await fetch(`${url}/${id}`, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },

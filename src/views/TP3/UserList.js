@@ -1,40 +1,45 @@
 import { useEffect, useState } from "react";
 import { deleteUser ,getallUsers } from './api';
 import EditUserForm from './UpdateUserForm';
+import ListContainer from "../../components/ListContainer";
+
+
 
 export default function UserList (){
+  
+  function UserItem({ item }) {
+    return (
+      <div>
+        Prénom: {item.name} - Nom: {item.lastname} - Age: {item.age} ans - Email: {item.email}
+      </div>
+    );
+  }
 
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-      getUsers();
+    getallUsers().then((data) => {
+      setUsers(data);
+    });
   }, [])
 
-  const getUsers = async () =>{
-      const response = await getallUsers();
-      setUsers(response.data);
-  }
+  console.log(users)
 
   const deleteData = async (id) => {
       await deleteUser(id);
-      getUsers();
+      getallUsers().then((data) => {
+        setUsers(data);
+      });
   }
 
-  let edit = false;
-
   return (
-    <div>
-      <h1>Liste des utilisateurs</h1>
-       {
-        users.map((user) =>{
-          <li id={user.id}>Nom: {user.lastname} Prénom: {user.name} Age: {user.age} Mail : {user.email} <button onClick={edit = true}>Modifier</button> <button onClick={() => deleteData(data.id)}>Supprimer</button></li>
-        })
-        }
-        { edit == true &&(
-          <EditUserForm></EditUserForm>
-        )
-        }
-      
-    </div>
+    <>
+      <h1>Liste d'utilisateurs</h1>
+      <ListContainer
+        initialItems={users}
+        ListItem={UserItem}
+        availableActions={{}}
+      />
+    </>
   )
 }
