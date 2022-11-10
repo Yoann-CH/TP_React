@@ -13,5 +13,18 @@
       "quantity": 2
     }
   ],
-  "users": []
+  "users": [{
+    "id":1,
+    "name": "Yoann",
+    "lastname": "Chambeux",
+    "age": 20,
+    "email": "yoann.chambeux@edu.devinci.fr"
+  },
+  {
+    "id":2,
+    "name": "Yoann",
+    "lastname": "Chambeux",
+    "age": 20,
+    "email": "yoann.chambeux@edu.devinci.fr"
+  }] 
 }
