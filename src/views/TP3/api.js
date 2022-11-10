@@ -15,7 +15,7 @@ export const addUser = async (user) => {
 }
 
 export const editUser = async (id, user) => {
-    return await axios.fetch(`${url}/${id}`, {
+    return await fetch(`${url}/${id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
