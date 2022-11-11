@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { addUser } from './api';
+import { addUser, editUser, getallUsers } from './api';
 
 const initialValue = {
     name: "",
@@ -8,7 +8,7 @@ const initialValue = {
     email: "",
 }
 
-export default function AddUserForm(){
+export default function UserForm(){
 
     const [user, setUser] = useState(initialValue);
     const {name, lastname, age, email} = user;
@@ -18,9 +18,23 @@ export default function AddUserForm(){
         setUser({...user, [e.target.name]: e.target.value});
     }
 
+    const [users, setUsers] = useState([]);
 
-    function handleSubmit(e) {
-        e.preventDefault();
+    useEffect(() => {
+        getallUsers().then((data) => {
+          setUsers(data);
+        });
+      }, [])
+
+
+
+    function handleSubmit() {
+        for(let n of users){
+            if(n.name.toLowerCase() === user.name.toLowerCase() && n.lastname.toLowerCase() === user.lastname.toLowerCase()){
+                editUser(n.id,user)
+                return
+            }
+        }
         addUser(user);
     }
 
@@ -28,7 +42,8 @@ export default function AddUserForm(){
 
     return (
         <div>
-            <h1>Création d'utilisateur</h1>
+            <h1>Formulaire utilisateur:</h1>
+            <p>Créer ou modifier un utilisateur</p>
             <form onSubmit={handleSubmit}>
                 <label for="name">Prénom</label>
                 <input name="name" onChange={(e) => onValueChange(e)} value={name}></input>
@@ -38,7 +53,7 @@ export default function AddUserForm(){
                 <input type="number" name="age" onChange={(e) => onValueChange(e)} value={age}></input>
                 <label for="email">Email</label>
                 <input name="email" onChange={(e) => onValueChange(e)} value={email}></input>
-                <input type="submit" value="Créer"></input>
+                <input type="submit" value="Envoyer"></input>
             </form>   
         </div>
     )

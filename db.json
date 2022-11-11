@@ -15,24 +15,17 @@
   ],
   "users": [
     {
-      "id": 1,
-      "name": "Yoann",
-      "lastname": "Chambeux",
-      "age": 20,
-      "email": "yoann.chambeux@edu.devinci.fr"
-    },
-    {
       "id": 2,
-      "name": "Yoann",
-      "lastname": "Chambeux",
-      "age": 20,
-      "email": "yoann.chambeux@edu.devinci.fr"
+      "name": "Didier",
+      "lastname": "Deschamps",
+      "age": 50,
+      "email": "didier.deschamps@edu.devinci.fr"
     },
     {
       "name": "Yoann",
       "lastname": "CHAMBEUX",
-      "age": 0,
-      "email": "yoann.chambeux@hotmail.com",
+      "age": "20",
+      "email": "yoann.chambeux@edu.devinci.fr",
       "id": 3
     }
   ]

@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import { deleteUser ,getallUsers } from './api';
-import EditUserForm from './UpdateUserForm';
+import { getallUsers } from './api';
+import Button from "../../components/Button";
+import UserForm from "./UserForm";
 import ListContainer from "../../components/ListContainer";
 
 
 
 export default function UserList (){
   
-  function UserItem({ item }) {
+  function UserItem({ item, onRemove }) {
     return (
       <div>
         Prénom: {item.name} - Nom: {item.lastname} - Age: {item.age} ans - Email: {item.email}
+        <Button title="Remove" onClick={onRemove} />
       </div>
     );
   }
@@ -23,14 +25,6 @@ export default function UserList (){
     });
   }, [])
 
-  console.log(users)
-
-  const deleteData = async (id) => {
-      await deleteUser(id);
-      getallUsers().then((data) => {
-        setUsers(data);
-      });
-  }
 
   return (
     <>
@@ -38,7 +32,12 @@ export default function UserList (){
       <ListContainer
         initialItems={users}
         ListItem={UserItem}
-        availableActions={{}}
+        AddForm={UserForm}
+        availableActions={{
+          add: true,
+          remove: true,
+          edit: true,
+        }}
       />
     </>
   )

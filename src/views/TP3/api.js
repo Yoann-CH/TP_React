@@ -20,19 +20,25 @@ export const addUser = (user) => {
     });
 }
 
-export const editUser = async (id, user) => {
-    return await fetch(`${url}/${id}`, {
+export const editUser = (id, user) => {
+    return fetch(`${url}/${id}`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
-        },
-        body: user
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: user.name,
+            lastname: user.lastname,
+            age: user.age,
+            email: user.email
+          })
     });
 }
 
 
-export const deleteUser = async (id) => {
-    return await fetch(`${url}/${id}`, {
+export const deleteUser = (id) => {
+    return fetch(`${url}/${id}`, {
         method: 'DELETE'
       });
 }

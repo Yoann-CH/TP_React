@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { deleteUser } from "../views/TP3/api";
 
 export default function ListContainer({
   initialItems = [],
@@ -21,6 +22,7 @@ export default function ListContainer({
   if (availableActions.remove) {
     listeners.remove = function () {
       setItems(items.filter((item) => item[keyProp] !== this[keyProp]));
+      deleteUser(this[keyProp]);
     };
   }
 
@@ -42,7 +44,6 @@ export default function ListContainer({
 
   return (
     <>
-      {availableActions.add && <AddForm onSubmit={listeners.add} />}
       {items.map(
         (item) =>
           console.log(item, item[keyProp]) || (
@@ -54,6 +55,7 @@ export default function ListContainer({
             />
           )
       )}
+      {availableActions.add && <AddForm onSubmit={listeners.add} />}
     </>
   );
 }
