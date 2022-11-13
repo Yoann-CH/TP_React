@@ -12,7 +12,7 @@ export default function UserList (){
     return (
       <div>
         Prénom: {item.name} - Nom: {item.lastname} - Age: {item.age} ans - Email: {item.email}
-        <Button title="Remove" onClick={onRemove} />
+        <Button title="Supprimer" onClick={onRemove} />
       </div>
     );
   }
@@ -24,6 +24,8 @@ export default function UserList (){
       setUsers(data);
     });
   }, [])
+
+  console.log(users)
 
 
   return (

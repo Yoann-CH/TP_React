@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { addUser, editUser, getallUsers } from './api';
+import React, { useState } from 'react';
+import { addUser, editUser } from './api';
 
 const initialValue = {
     name: "",
@@ -8,7 +8,7 @@ const initialValue = {
     email: "",
 }
 
-export default function UserForm(){
+export default function UserForm({users, onAdd, onUpdate}){
 
     const [user, setUser] = useState(initialValue);
     const {name, lastname, age, email} = user;
@@ -18,27 +18,26 @@ export default function UserForm(){
         setUser({...user, [e.target.name]: e.target.value});
     }
 
-    const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        getallUsers().then((data) => {
-          setUsers(data);
-        });
-      }, [])
-
-
-
-    function handleSubmit() {
+    function handleSubmit(e) {
+        e.preventDefault();
         for(let n of users){
             if(n.name.toLowerCase() === user.name.toLowerCase() && n.lastname.toLowerCase() === user.lastname.toLowerCase()){
-                editUser(n.id,user)
-                return
+                editUser(n.id,user);
+                onUpdate(user);
+                return;
             }
         }
         addUser(user);
+        onAdd({
+            name: user.name,
+            lastname: user.lastname,
+            age: user.age,
+            email: user.email,
+            id: users.length + 1
+          });
     }
 
-    console.log(user)
 
     return (
         <div>

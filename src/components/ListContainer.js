@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { deleteUser } from "../views/TP3/api";
+import { getallUsers } from "../views/TP3/api";
 
 export default function ListContainer({
   initialItems = [],
@@ -30,17 +31,26 @@ export default function ListContainer({
     listeners.edit = function (editedItem) {
       setItems(
         items.map((item) => {
-          if (item[keyProp] === editedItem[keyProp]) {
-            return editedItem;
+          if (item.name.toLowerCase() === editedItem.name.toLowerCase() && item.lastname.toLowerCase() === editedItem.lastname.toLowerCase()) {
+            return {
+              name: editedItem.name,
+              lastname: editedItem.lastname,
+              age: editedItem.age,
+              email: editedItem.email,
+              id:item.id 
+            };
           }
           return item;
         })
       );
     };
   }
+
   useEffect(() => {
-    setItems(initialItems);
-  }, [initialItems]);
+    getallUsers().then((data) => {
+      setItems(data);
+    });
+  }, [])
 
   return (
     <>
@@ -55,7 +65,7 @@ export default function ListContainer({
             />
           )
       )}
-      {availableActions.add && <AddForm onSubmit={listeners.add} />}
+      {availableActions.add && <AddForm onAdd={listeners.add} onUpdate={listeners.edit} users={items}  />}
     </>
   );
 }
